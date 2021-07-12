@@ -1,0 +1,50 @@
+{
+    "jobs": [
+        {
+            "name": "Add",
+            "code": "Add()",
+            "params": []
+        },
+        {
+            "name": "Multiply",
+            "code": "Multiply()",
+            "params": []
+        },
+        {
+            "name": "GenerateRandom_Looped",
+            "code": "GenerateRandom_Looped(valRange=[-100, 100])",
+            "params": [
+                {
+                    "name": "valRange",
+                    "default": [-100, 100],
+                    "type": "list:int"
+                }
+            ]
+        },
+        {
+            "name": "GenerateRandom_Numpy",
+            "code": "GenerateRandom_Numpy(valRange=[-100, 100])",
+            "params": [
+                {
+                    "name": "valRange",
+                    "default": [-100, 100],
+                    "type": "list:int"
+                }
+            ]
+        },
+        {
+            "name": "Wait",
+            "code": "Wait(seconds=1.0)",
+            "params": [
+                {
+                    "name": "seconds",
+                    "default": 1.0,
+                    "type": "float",
+                    "min": 0.0,
+                    "max": 60.0,
+                    "step": 0.25
+                }
+            ]
+        }
+    ]
+}

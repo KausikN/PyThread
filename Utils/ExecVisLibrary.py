@@ -8,30 +8,33 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 
+# Utils Vars
+figsize = (6.4, 4.8)
+dpi = 100.0
+fig = Figure(figsize=figsize, dpi=dpi)
+canvas = FigureCanvasAgg(fig)
 
 # Utils Functions
-def DisplayImageSequence(imgSeq, delays, delayScale=0.1):
-    delays = np.array(delays)
-    delays_Norm = (delays - np.min(delays)) / (np.max(delays) - np.min(delays)) * delayScale
-    frameNo = 0
-    while(True):
-        if delays_Norm[frameNo % len(imgSeq)] == 0.0 and ((frameNo % len(imgSeq)) < (len(imgSeq)-1)):
-            frameNo += 1
-            continue
-        frame = imgSeq[frameNo % len(imgSeq)]
-        cv2.imshow('Exec', frame)
+def PlotExecHeatMap(ExecTimesGrid, title=""):
+    fig.clear(True)
+    ax = fig.add_subplot(111)
 
-        time.sleep(delays_Norm[frameNo % len(imgSeq)])
+    
+    ax = sns.heatmap(ExecTimesGrid, ax=ax)
+    plt.title(title)
+    # plt.show()
 
-        # Press Q on keyboard to  exit
-        if cv2.waitKey(25) & 0xFF == ord('q'):
-            break
+    canvas.draw()
+    buf = canvas.buffer_rgba()
+    I_Heatmap = np.asarray(buf)
 
-        frameNo += 1
+    return I_Heatmap
 
 # Main Functions
-def ExecVis_Basic(data, title, pixSize=[1, 1], delayScale=0.5):
+def ExecVis_Basic(data, title, pixSize=[1, 1], displayData=True):
     '''Basic Execution Data Visualiser'''
     # Generate Plot Data
     data = np.array(data)
@@ -65,33 +68,30 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], delayScale=0.5):
     JobSizeFlat = np.product(JobSize)
 
     # Display Data
-    print("----- EXEC DATA ---------------------------------------------")
-    print("Function Name  :", FunctionName)
-    print("Job Size       :", JobSize)
-    print()
-    print("-- Overall Analysis ---------------")
-    print("Started  :", overallAnalysis["Start"])
-    print("Ended    :", overallAnalysis["End"])
-    print()
-    print("Total Turn Around Time (TAT)        :", overallAnalysis["TAT"])
-    print("Turn Around Time per Job (TAT/job)  :", overallAnalysis["TAT_per_job"])
-    print("Total Waiting Time (WT)             :", overallAnalysis["WT"])
-    print()
-    print("-- Execution Analysis -------------")
-    print("Total Execution Time                 :", execAnalysis["total"])
-    print("Min Execution Time                   :", execAnalysis["min"])
-    print("Max Execution Time                   :", execAnalysis["max"])
-    print("Mean Execution Time                  :", execAnalysis["mean"])
-    print("Standard Deviation of Execution Time :", execAnalysis["std"])
+    if displayData:
+        print("----- EXEC DATA ---------------------------------------------")
+        print("Function Name  :", FunctionName)
+        print("Job Size       :", JobSize)
+        print()
+        print("-- Overall Analysis ---------------")
+        print("Started  :", overallAnalysis["Start"])
+        print("Ended    :", overallAnalysis["End"])
+        print()
+        print("Total Turn Around Time (TAT)        :", overallAnalysis["TAT"])
+        print("Turn Around Time per Job (TAT/job)  :", overallAnalysis["TAT_per_job"])
+        print("Total Waiting Time (WT)             :", overallAnalysis["WT"])
+        print()
+        print("-- Execution Analysis -------------")
+        print("Total Execution Time                 :", execAnalysis["total"])
+        print("Min Execution Time                   :", execAnalysis["min"])
+        print("Max Execution Time                   :", execAnalysis["max"])
+        print("Mean Execution Time                  :", execAnalysis["mean"])
+        print("Standard Deviation of Execution Time :", execAnalysis["std"])
 
 
     # Plot Exec Times
     ExecTimesGrid = np.reshape(exec_times, JobSize)
-    ax = sns.heatmap(ExecTimesGrid)
-    # ExecTimesGrid_Norm = (ExecTimesGrid - np.min(ExecTimesGrid)) / (np.max(ExecTimesGrid) - np.min(ExecTimesGrid))
-    # plt.imshow(ExecTimesGrid_Norm, cmap='hot', interpolation='nearest')
-    plt.title(title)
-    plt.show()
+    I_HeatMap = PlotExecHeatMap(ExecTimesGrid, title)
 
     # Plot Finish Animation - only for 2D data
     if len(JobSize) == 2:
@@ -102,7 +102,7 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], delayScale=0.5):
         for i in range(JobSize[0]):
             for j in range(JobSize[1]):
                 timesData.extend([StartTimesGrid[i][j], EndTimesGrid[i][j]])
-                namesData.extend(["S_" + str(i) + "_" + str(j), "E_" + str(i) + "_" + str(j)])
+                namesData.extend(["B_" + str(i) + "_" + str(j), "E_" + str(i) + "_" + str(j)])
 
         zipped_lists = zip(timesData, namesData)
         sorted_pairs = sorted(zipped_lists, reverse=False)
@@ -114,25 +114,41 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], delayScale=0.5):
             spl = n.split("_")
             eventOrder.append([spl[0], int(spl[1]), int(spl[2])])
 
-        delayData = [0.0, 0.0]
+        delayData = []
         for i in range(1, len(timesData_Sorted)):
             delayData.append(timesData_Sorted[i] - timesData_Sorted[i-1])
-
-        print(eventOrder)
-        print(delayData)
+        delayData.append(0.0)
 
         # Generate Images
         I_Size = np.array(JobSize) * np.array(pixSize)
         I_event = np.zeros(I_Size)
         event_Is = [np.copy(I_event)]
-        for event in eventOrder:
-            if event[0] == "S":
+        for i in range(len(eventOrder)):
+            event = eventOrder[i]
+            delay = delayData[i]
+            if event[0] == "B":
                 I_event[event[1]*pixSize[0]:(event[1]+1)*pixSize[0] - 1, event[2]*pixSize[1]:(event[2]+1)*pixSize[1] - 1] = 0.5
             elif event[0] == "E":
                 I_event[event[1]*pixSize[0]:(event[1]+1)*pixSize[0] - 1, event[2]*pixSize[1]:(event[2]+1)*pixSize[1] - 1] = 1.0
-            event_Is.append(np.copy(I_event))
+            if delay > 0.0 or i == (len(eventOrder)-1):
+                event_Is.append(np.copy(I_event))
         
         # Show Animation
-        DisplayImageSequence(event_Is, delayData, delayScale)
+        # DisplayImageSequence(event_Is, delayData, delayScale)
+
+        # Analysis Data
+        AnalysisData = {
+            "func": FunctionName,
+            "size": JobSize,
+            "eventOrder": eventOrder,
+            "eventTimes": timesData_Sorted,
+            "delayData": delayData,
+            "execAnalysis": execAnalysis,
+            "overallAnalysis": overallAnalysis,
+            "eventAnim": event_Is,
+            "heatMap": I_HeatMap
+        }
+
+        return AnalysisData
 
 # Driver Code

@@ -1,0 +1,10 @@
+{
+    "PROJECT_NAME": "PyThread",
+    "PROJECT_LINK": "https://github.com/KausikN/PyThread",
+
+    "PROJECT_DESC": "A python tool to visualise and run threaded jobs",
+
+    "PROJECT_README": "README.md",
+
+    "PROJECT_MODES": ["Exec Vis"]
+}

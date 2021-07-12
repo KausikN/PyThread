@@ -1,0 +1,40 @@
+{
+    "jobinits": [
+        {
+            "name": "Random",
+            "code": "Random(n_operands=2, operand_type=int, valRange=[-100, 100])",
+            "params": [
+                {
+                    "name": "n_operands",
+                    "default": 1,
+                    "type": "int",
+                    "min": 1,
+                    "max": 100,
+                    "step": 1
+                },
+                {
+                    "name": "operand_type",
+                    "default": "int",
+                    "type": "choice:obj",
+                    "choices": ["int", "float", "str"]
+                },
+                {
+                    "name": "valRange",
+                    "default": [-100, 100],
+                    "type": "list:float"
+                }
+            ]
+        },
+        {
+            "name": "Assign",
+            "code": "Assign(assignOperands=[])",
+            "params": [
+                {
+                    "name": "assignOperands",
+                    "default": [],
+                    "type": "list:obj"
+                }
+            ]
+        }
+    ]
+}

@@ -10,8 +10,9 @@ import time
 import datetime
 import functools
 
-import JobLibrary
-import ExecVisLibrary
+from JobLibrary import JobLibrary
+from Utils import ExecVisLibrary
+from Utils import VideoUtils
 
 # Main Vars
 THREADS_DATA = {}
@@ -95,7 +96,7 @@ def Run2DJob_Seq_Basic(job, size):
 
 def Run2DJob_Threaded_Basic(job, size):
     '''
-    Run a 2D job (2D set of functions) parallelly in threaded fashion.
+    Run a 2D job (2D set of functions) parallely in threaded fashion.
     '''
     execData2D = []
 
@@ -121,28 +122,34 @@ def Run2DJob_Threaded_Basic(job, size):
     return execData2D
 
 # Driver Code
-# Params
-ExecGridShape = [10, 10]
+# # Params
+# ExecGridShape = [10, 10]
 
-JobFunc = functools.partial(JobLibrary.Job_Wait, seconds=5.0)
-# JobInitFunc = functools.partial(JobLibrary.JobInit_Random, size=ExecGridShape, n_operands=100000, operand_type=int, valRange=[-10000, 10000])
-JobInitFunc = functools.partial(JobLibrary.JobInit_Assign, size=ExecGridShape, assignOperands=[])
+# JobFunc = functools.partial(JobLibrary.Job_Wait, seconds=5.0)
+# # JobInitFunc = functools.partial(JobLibrary.JobInit_Random, size=ExecGridShape, n_operands=100000, operand_type=int, valRange=[-10000, 10000])
+# JobInitFunc = functools.partial(JobLibrary.JobInit_Assign, size=ExecGridShape, assignOperands=[])
 
-savePath = 'ExecData/TestExec.json'
-# Params
+# savePath_Data = 'ExecData/TestExec.json'
+# savePath_GIF = 'ExecData/TestExec.gif'
+# # Params
 
-# RunCode
-# Get initialised function grid
-print("Initialising Jobs...")
-JobGrid = JobInitFunc(JobFunc)
-# Run Jobs
-print("Running Jobs...")
-# ExecutionData = Run2DJob_Seq_Basic(JobGrid, ExecGridShape)
-ExecutionData = Run2DJob_Threaded_Basic(JobGrid, ExecGridShape)
+# # RunCode
+# # Get initialised function grid
+# print("Initialising Jobs...")
+# JobGrid = JobInitFunc(JobFunc)
+# # Run Jobs
+# print("Running Jobs...")
+# # ExecutionData = Run2DJob_Seq_Basic(JobGrid, ExecGridShape)
+# ExecutionData = Run2DJob_Threaded_Basic(JobGrid, ExecGridShape)
 
-# Visualise Results
-print("Visualising Jobs...")
-ExecVisLibrary.ExecVis_Basic(ExecutionData, "Test Vis", pixSize=[20, 20], delayScale=5.0)
+# # Visualise Results
+# print("Visualising Jobs...")
+# AnalysisData = ExecVisLibrary.ExecVis_Basic(ExecutionData, "Test Vis", pixSize=[20, 20])
+# I_HeatMap, event_Is, delayData = AnalysisData["heatMap"], AnalysisData["eventAnim"], AnalysisData["delayData"]
 
-# Save Results
-json.dump(ExecutionData, open(savePath, 'w'))
+# # Save Results
+# json.dump(ExecutionData, open(savePath_Data, 'w'))
+# VideoUtils.SaveImageSeq(event_Is, savePath_GIF, size=(640, 480), fps=24)
+
+# VideoUtils.ViewImage(I_HeatMap)
+# VideoUtils.DisplayImageSequence(event_Is, delays=delayData, delayScale=0.5)
