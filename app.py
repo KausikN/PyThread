@@ -219,7 +219,7 @@ def UI_KeyValuePairDisplay(key, value):
     col2.markdown("```\n" + str(value))
 
 def UI_ExecVisualise(ExecutionData):
-    AnalysisData = ExecVisLibrary.ExecVis_Basic(ExecutionData, "Vis", pixSize=JOB_SHAPE_INDICATORIMAGE_BLOCKSIZE, displayData=False)
+    AnalysisData = ExecVisLibrary.ExecVis_Basic(ExecutionData, "Vis", pixSize=JOB_SHAPE_INDICATORIMAGE_BLOCKSIZE, animationPad=5, displayData=False)
     
     st.markdown("# Analysis")
     st.markdown("## Basic Analysis")
@@ -279,8 +279,11 @@ def exec_vis():
 
     # Display Outputs
     if st.button("Execute"):
+        print("Initialising Jobs...")
         JobGrid = JobInitFunc()
+        print("Running Jobs...")
         ExecutionData = USERINPUT_ExecMode(JobGrid, USERINPUT_JobShape)
+        print("Visualising Jobs...")
         UI_ExecVisualise(ExecutionData)
     
 #############################################################################################################################

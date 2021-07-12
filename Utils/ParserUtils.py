@@ -39,7 +39,7 @@ def ObjectParser(data, tempSavePath="StreamLitGUI/CacheData/"):
     varName = 'obj'
     importCode = """import pickle"""
     dataCode = "Data = " + str(data)
-    saverCode = """pickle.dump(Data, "{saveDir}{saveName}.p")""".format(saveDir=tempSavePath, saveName=varName)
+    saverCode = """pickle.dump(Data, open("{saveDir}{saveName}.p", 'wb'))""".format(saveDir=tempSavePath, saveName=varName)
     finalCode = importCode + "\n" + dataCode + "\n" + saverCode
     exec(finalCode, globals())
     parsed_data = pickle.load(open(os.path.join(tempSavePath, varName + ".p"), 'rb'))

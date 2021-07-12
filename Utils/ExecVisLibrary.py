@@ -34,7 +34,7 @@ def PlotExecHeatMap(ExecTimesGrid, title=""):
     return I_Heatmap
 
 # Main Functions
-def ExecVis_Basic(data, title, pixSize=[1, 1], displayData=True):
+def ExecVis_Basic(data, title, pixSize=[1, 1], animationPad=1, displayData=True):
     '''Basic Execution Data Visualiser'''
     # Generate Plot Data
     data = np.array(data)
@@ -122,7 +122,7 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], displayData=True):
         # Generate Images
         I_Size = np.array(JobSize) * np.array(pixSize)
         I_event = np.zeros(I_Size)
-        event_Is = [np.copy(I_event)]
+        event_Is = [np.copy(I_event)] * animationPad
         for i in range(len(eventOrder)):
             event = eventOrder[i]
             delay = delayData[i]
@@ -131,7 +131,7 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], displayData=True):
             elif event[0] == "E":
                 I_event[event[1]*pixSize[0]:(event[1]+1)*pixSize[0] - 1, event[2]*pixSize[1]:(event[2]+1)*pixSize[1] - 1] = 1.0
             if delay > 0.0 or i == (len(eventOrder)-1):
-                event_Is.append(np.copy(I_event))
+                event_Is.extend([np.copy(I_event)]*animationPad)
         
         # Show Animation
         # DisplayImageSequence(event_Is, delayData, delayScale)
