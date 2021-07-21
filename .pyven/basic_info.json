@@ -5,6 +5,7 @@
         "numpy",
         "matplotlib",
         "opencv-python-headless",
-        "tqdm"
+        "tqdm",
+        "seaborn"
     ]
 }
