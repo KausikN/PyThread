@@ -1,0 +1,10 @@
+{
+    "repo_name": "PyThread",
+    "requirements": [
+        "streamlit",
+        "numpy",
+        "matplotlib",
+        "opencv-python-headless",
+        "tqdm"
+    ]
+}

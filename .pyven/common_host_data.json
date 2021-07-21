@@ -1,0 +1,10 @@
+{
+    "files_to_download": [
+        "StreamLitGUI/",
+        "app.py",
+        "PyThread.py",
+        "JobLibrary/",
+        "Utils/",
+        "ExecData/"
+    ]
+}

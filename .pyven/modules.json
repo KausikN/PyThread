@@ -1,0 +1,243 @@
+{
+    "name": "PyThread",
+    "repoLink": "https://github.com/KausikN/PyThread",
+    "localPath": "E:/Github Codes and Projects/Projects/PyThread",
+    "modules": {
+        "app.py": {
+            "name": "app",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyThread/blob/master/app.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": [
+                "os.py",
+                "cv2.py",
+                "pickle.py",
+                "functools.py",
+                "numpy.py",
+                "streamlit.py",
+                "json.py",
+                "PyThread.py",
+                "Utils/ParserUtils.py",
+                "Utils/ExecVisLibrary.py",
+                "Utils/VideoUtils.py",
+                "cv2.py",
+                "functools.py",
+                "numpy.py",
+                "pickle.py",
+                "JobLibrary/JobLibrary.py"
+            ]
+        },
+        "PyThread.py": {
+            "name": "PyThread",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyThread/blob/master/PyThread.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": [
+                "os.py",
+                "json.py",
+                "threading.py",
+                "time.py",
+                "datetime.py",
+                "functools.py",
+                "JobLibrary/JobLibrary.py",
+                "Utils/ExecVisLibrary.py",
+                "Utils/VideoUtils.py"
+            ]
+        },
+        "JobLibrary/JobLibrary.py": {
+            "name": "JobLibrary",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyThread/blob/master/JobLibrary/JobLibrary.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "JobLibrary",
+            "dependencies": [
+                "functools.py",
+                "numpy.py",
+                "random.py",
+                "time.py"
+            ]
+        },
+        "Utils/ExecVisLibrary.py": {
+            "name": "ExecVisLibrary",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyThread/blob/master/Utils/ExecVisLibrary.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "Utils",
+            "dependencies": [
+                "cv2.py",
+                "time.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "seaborn.py",
+                "matplotlib/figure.py",
+                "matplotlib/backends/backend_agg.py"
+            ]
+        },
+        "Utils/ParserUtils.py": {
+            "name": "ParserUtils",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyThread/blob/master/Utils/ParserUtils.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "Utils",
+            "dependencies": [
+                "os.py",
+                "pickle.py",
+                "numpy.py"
+            ]
+        },
+        "Utils/VideoUtils.py": {
+            "name": "VideoUtils",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyThread/blob/master/Utils/VideoUtils.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "Utils",
+            "dependencies": [
+                "os.py",
+                "cv2.py",
+                "time.py",
+                "PIL.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "tqdm.py"
+            ]
+        },
+        "time.py": {
+            "name": "time",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "matplotlib.pyplot.py": {
+            "name": "matplotlib.pyplot",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "threading.py": {
+            "name": "threading",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "PIL.py": {
+            "name": "PIL",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "os.py": {
+            "name": "os",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "functools.py": {
+            "name": "functools",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "datetime.py": {
+            "name": "datetime",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "matplotlib/figure.py": {
+            "name": "figure",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "matplotlib",
+            "dependencies": []
+        },
+        "streamlit.py": {
+            "name": "streamlit",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "random.py": {
+            "name": "random",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "tqdm.py": {
+            "name": "tqdm",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "json.py": {
+            "name": "json",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "numpy.py": {
+            "name": "numpy",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "pickle.py": {
+            "name": "pickle",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "seaborn.py": {
+            "name": "seaborn",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        },
+        "matplotlib/backends/backend_agg.py": {
+            "name": "backend_agg",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "matplotlib/backends",
+            "dependencies": []
+        },
+        "cv2.py": {
+            "name": "cv2",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyThread",
+            "subDir": "",
+            "dependencies": []
+        }
+    }
+}
