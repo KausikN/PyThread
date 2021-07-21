@@ -202,7 +202,7 @@ def UI_JobInitDataSelector(AvailableJobInitsNames, key=""):
     return USERINPUT_JobInitCode, ParamsInputs
 
 def UI_JobInitSelect(AvailableJobInitsNames):
-    USERINPUT_JobInitCode, ParamsInputs = UI_JobInitDataSelector(AvailableJobInitsNames, "JobKey_")
+    USERINPUT_JobInitCode, ParamsInputs = UI_JobInitDataSelector(AvailableJobInitsNames, "JobKeyInit_")
     USERINPUT_JobInitCode_Parsed = ParserUtils.ParseJobInitsText(USERINPUT_JobInitCode)
     JobInitFuncs = GetFunctions(USERINPUT_JobInitCode_Parsed)
     JobInitFunc = functools.partial(JobInitFuncs[0].func, **ParamsInputs)
