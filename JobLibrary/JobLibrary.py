@@ -48,37 +48,85 @@ def JobInit_Assign(JobFunc, size=[1, 1], assignOperands=[]):
 
 # Job Functions
 def Job_Add(*operands):
-    if len(operands) == 0:
-        return None
-    sum = operands[0]
-    for operand in operands[1:]:
-        sum += operand
-    return sum
+    timeStamps = []
+    sum = 0
+
+    timeStamps.append(time.time_ns())
+    if len(operands) > 0:
+        sum = operands[0]
+        for operand in operands[1:]:
+            sum += operand
+            timeStamps.append(time.time_ns())
+    timeStamps.append(time.time_ns())
+
+    output = {
+        "sum": sum,
+        "time_stamps": timeStamps
+    }
+    return output
 
 def Job_Multiply(*operands):
-    if len(operands) == 0:
-        return None
-    sum = operands[0]
-    for operand in operands[1:]:
-        sum += operand
-    return sum
+    timeStamps = []
+    product = 0
+
+    timeStamps.append(time.time_ns())
+    if len(operands) > 0:
+        product = operands[0]
+        for operand in operands[1:]:
+            product *= operand
+            timeStamps.append(time.time_ns())
+    timeStamps.append(time.time_ns())
+
+    output = {
+        "product": product,
+        "time_stamps": timeStamps
+    }
+    return output
 
 def Job_GenerateRandom_Looped(*operands, valRange=[-100, 100]):
+    timeStamps = []
+    genRand = []
+
+    timeStamps.append(time.time_ns())
     genSize = np.array(operands)
     genSizeFlat = np.product(genSize)
-    genRand = []
     for i in range(genSizeFlat):
         genRand.append(random.randint(valRange[0], valRange[1]))
+        timeStamps.append(time.time_ns())
     genRand = np.reshape(genRand, genSize)
-    return genRand
+    timeStamps.append(time.time_ns())
+
+    output = {
+        "random_value": genRand,
+        "time_stamps": timeStamps
+    }
+    return output
 
 def Job_GenerateRandom_Numpy(*operands, valRange=[-100, 100]):
+    timeStamps = []
+    genRand = []
+
+    timeStamps.append(time.time_ns())
     genSize = np.array(operands)
     genRand = np.random.randint(valRange[0], valRange[1], genSize)
-    return genRand
+    timeStamps.append(time.time_ns())
+
+    output = {
+        "random_value": genRand,
+        "time_stamps": timeStamps
+    }
+    return output
 
 def Job_Wait(*operands, seconds=1.0):
+    timeStamps = []
+
+    timeStamps.append(time.time_ns())
     time.sleep(seconds)
-    return None
+    timeStamps.append(time.time_ns())
+
+    output = {
+        "time_stamps": timeStamps
+    }
+    return output
 
 # Driver Code

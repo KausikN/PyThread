@@ -46,7 +46,7 @@ def ThreadRunner_Basic(job, index):
     execData_Cell["start"] = BeforeLog_Basic(index, job)
     
     # Run Job
-    job()
+    execData_Cell["exec"] = job() # Runs Job and gets all stamped times during execution
 
     # After finish log exec data
     execData_Cell["end"] = AfterLog_Basic(execData_Cell["start"])
@@ -85,7 +85,7 @@ def Run2DJob_Seq_Basic(job, size):
             execData_Cell["start"] = BeforeLog_Basic([i, j], job[i][j])
 
             # Run Job
-            job[i][j]()
+            execData_Cell["exec"] = job[i][j]()
 
             # After finish log exec data
             execData_Cell["end"] = AfterLog_Basic(execData_Cell["start"])

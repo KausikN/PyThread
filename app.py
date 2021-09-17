@@ -245,6 +245,8 @@ def UI_ExecVisualise(ExecutionData):
     st.markdown("## Execution Heatmap")
     I_HeatMap = AnalysisData["heatMap"]
     st.image(I_HeatMap, caption="Execution Time HeatMap", use_column_width=True)
+    I_ExecutionMap = AnalysisData["executionMap"]
+    st.image(I_ExecutionMap, caption="Execution Map", use_column_width=True)
 
     st.markdown("## Execution Animation")
     event_Is = AnalysisData["eventAnim"]

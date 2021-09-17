@@ -33,6 +33,20 @@ def PlotExecHeatMap(ExecTimesGrid, title=""):
 
     return I_Heatmap
 
+def PlotTimeStamps(ExecTimeStamps, title=""):
+    fig.clear(True)
+    for i in range(len(ExecTimeStamps)):
+        for j in range(len(ExecTimeStamps[i])):
+            ax = fig.add_subplot(len(ExecTimeStamps), len(ExecTimeStamps[i]), i*len(ExecTimeStamps[i])+j+1)
+            completionPercentages = np.linspace(100.0, 0.0, ExecTimeStamps[i][j].shape[0])
+            ax.plot(ExecTimeStamps[i][j], completionPercentages)
+    plt.title(title)
+    canvas.draw()
+    buf = canvas.buffer_rgba()
+    I_ExecTimeStamps = np.asarray(buf)
+
+    return I_ExecTimeStamps
+
 # Main Functions
 def ExecVis_Basic(data, title, pixSize=[1, 1], animationPad=1, displayData=True):
     '''Basic Execution Data Visualiser'''
@@ -40,6 +54,7 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], animationPad=1, displayData=True)
     data = np.array(data)
     # Exec Times Analysis
     dataFlat = np.reshape(data, np.product(data.shape))
+    exec_timeStamps = []
     exec_times = []
     start_times = []
     end_times = []
@@ -47,6 +62,11 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], animationPad=1, displayData=True)
         exec_times.append(d["end"]["exec_time"] / 1e9)
         start_times.append(d["start"]["start_time"] / 1e9)
         end_times.append(d["end"]["end_time"] / 1e9)
+    for dr in data:
+        row = []
+        for d in dr:
+            row.append(np.array(d["exec"]["time_stamps"]) / 1e9)
+        exec_timeStamps.append(row)
 
     execAnalysis = {
         "total": np.sum(exec_times),
@@ -91,7 +111,8 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], animationPad=1, displayData=True)
 
     # Plot Exec Times
     ExecTimesGrid = np.reshape(exec_times, JobSize)
-    I_HeatMap = PlotExecHeatMap(ExecTimesGrid, title)
+    I_HeatMap = np.copy(PlotExecHeatMap(ExecTimesGrid, title))
+    I_ExecTimeStamps = np.copy(PlotTimeStamps(exec_timeStamps, title))
 
     # Plot Finish Animation - only for 2D data
     if len(JobSize) == 2:
@@ -146,7 +167,8 @@ def ExecVis_Basic(data, title, pixSize=[1, 1], animationPad=1, displayData=True)
             "execAnalysis": execAnalysis,
             "overallAnalysis": overallAnalysis,
             "eventAnim": event_Is,
-            "heatMap": I_HeatMap
+            "heatMap": I_HeatMap,
+            "executionMap": I_ExecTimeStamps
         }
 
         return AnalysisData
