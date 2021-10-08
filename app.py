@@ -135,7 +135,7 @@ pickle.dump({JobObj}, open('{DEFAULT_CODE_PACKAGE}' + '/{JobObj}.p', 'wb'))
 
 # UI Functions
 def UI_JobShape():
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     USERINPUT_ThreadsCount_X = col2.slider("N Job Columns (X)", 1, 15, 1, 1)
     USERINPUT_ThreadsCount_Y = col2.slider("N Job Rows (Y)", 1, 15, 1, 1)
     JobShape = [USERINPUT_ThreadsCount_Y, USERINPUT_ThreadsCount_X]
@@ -177,7 +177,7 @@ def UI_Params(paramsData, col=st, key=""):
     return ParamsInputs
 ####################################################################################################################
 def UI_JobDataSelector(AvailableJobsNames, key=""):
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     USERINPUT_JobName = col1.selectbox("", AvailableJobsNames, key="J_" + key)
     USERINPUT_JobIndex = AvailableJobsNames.index(USERINPUT_JobName)
     USERINPUT_JobData = AVAILABLE_JOBS[USERINPUT_JobIndex]
@@ -193,7 +193,7 @@ def UI_JobSelect(AvailableJobsNames):
     return JobFunc
 ####################################################################################################################
 def UI_JobInitDataSelector(AvailableJobInitsNames, key=""):
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     USERINPUT_JobInitName = col1.selectbox("", AvailableJobInitsNames, key="J_" + key)
     USERINPUT_JobInitIndex = AvailableJobInitsNames.index(USERINPUT_JobInitName)
     USERINPUT_JobInitData = AVAILABLE_JOBINITS[USERINPUT_JobInitIndex]
@@ -214,7 +214,7 @@ def UI_ExecModeSelect():
     return USERINPUT_ExecMode
 
 def UI_KeyValuePairDisplay(key, value):
-    col1, col2 = st.beta_columns([1, 2])
+    col1, col2 = st.columns([1, 2])
     col1.markdown(key)
     col2.markdown("```\n" + str(value))
 
